@@ -17,6 +17,7 @@
           <?php echo ucfirst($this->uri->segment(2));?>
         </h2>
         <div width="100%"><a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/add" class="btn btn-success">جدید</a></h2>
+        <!-- <div width="100%"><a  href="<?php echo site_url("admin").'/'.$this->uri->segment(2); ?>/export" class="btn btn-primary">ذخیره در اکسل</a></h2> -->
       </div>
 
       <div class="row">

@@ -1,13 +1,13 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Sabad Admin </title>
+    <title>مدیریت برنامه‌های البرزدیتا</title>
     <meta charset="utf-8">
     <link href="<?php echo base_url(); ?>assets/css/admin/global.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div class="container login">
-      <?php 
+      <?php
       $attributes = array('class' => 'form-signin');
       echo form_open('admin/login/validate_credentials', $attributes);
       echo '<h2 class="form-signin-heading">Login</h2>';
@@ -17,7 +17,7 @@
           echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>خطا!</strong> نام کاربری و رمز عبور را دوباره بررسی کنید';
-          echo '</div>';             
+          echo '</div>';
       }
       echo "<br />";
       //echo anchor('admin/signup', 'Signup!');
@@ -25,10 +25,9 @@
       echo "<br />";
       echo form_submit('submit', 'Login', 'class="btn btn-large btn-primary"');
       echo form_close();
-      ?>      
+      ?>
     </div><!--container-->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.7.1.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
   </body>
-</html>    
-    
+</html>

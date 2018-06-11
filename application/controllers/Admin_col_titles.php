@@ -260,6 +260,23 @@ class Admin_col_titles extends CI_Controller {
         $id = $this->uri->segment(4);
         $this->col_titles_model->delete($id);
         redirect('admin/col_titles');
-    }//edit
+    }
+
+		/**
+		* export
+		*/
+		public function export_csv()
+		{
+
+		$this->load->dbutil(); // call db utility library
+		$this->load->helper('download'); // call download helper
+
+		$query = $this->col_titles_model->get_all_cursor($id);
+
+		$filename = 'dumpexport.csv'; // name of csv file to download with data
+		force_download($filename, $this->dbutil->csv_from_result($query)); // download file
+
+		}
+
 }
 ?>

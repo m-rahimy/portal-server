@@ -80,6 +80,7 @@ $route['admin/indicator_tables/(:any)'] = 'admin_indicator_tables/index/$1';
 /* ADMIN edits cols */
 $route['admin/cols'] = 'admin_col_titles/index';
 $route['admin/cols/add'] = 'admin_col_titles/add';
+$route['admin/cols/export'] = 'admin_col_titles/export_csv';
 $route['admin/cols/update'] = 'admin_col_titles/update';
 $route['admin/cols/update/(:any)'] = 'admin_col_titles/update/$1';
 $route['admin/cols/delete/(:any)'] = 'admin_col_titles/delete/$1';

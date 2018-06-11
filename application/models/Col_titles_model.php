@@ -1,6 +1,6 @@
 <?php
 class Col_titles_model extends CI_Model {
- 
+
     /**
     * Responsable for auto load the database
     * @return void
@@ -13,7 +13,7 @@ class Col_titles_model extends CI_Model {
 
     /**
     * Get column_title by it's id
-    * @param int $id 
+    * @param int $id
     * @return array
     */
     public function get_by_id($id)
@@ -22,12 +22,12 @@ class Col_titles_model extends CI_Model {
 		$this->db->from('column_title');
 		$this->db->where('id', $id);
 		$query = $this->db->get();
-		return $query->result_array(); 
-    }    
-    
+		return $query->result_array();
+    }
+
     /**
     * Get column_title by it's name
-    * @param text $text 
+    * @param text $text
     * @return array
     */
     public function get_by_name($text)
@@ -36,22 +36,26 @@ class Col_titles_model extends CI_Model {
 		$this->db->from('column_title');
 		$this->db->like('name', $text);
 		$query = $this->db->get();
-		return $query->result_array(); 
-    }    
+		return $query->result_array();
+    }
 
+    public function get_all_cursor($value='')
+    {
+     return  $this->db->query("SELECT * FROM column_title"); // whatever you want to export to CSV, just select in query
+    }
     /**
     * Fetch column_title data from the database
     * possibility to mix search, filter and order
-    * @param string $search_string 
+    * @param string $search_string
     * @param strong $order
-    * @param string $order_type 
+    * @param string $order_type
     * @param int $limit_start
     * @param int $limit_end
     * @return array
     */
     public function get_all($search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end=null)
     {
-	    
+
 		$this->db->select('*');
 		$this->db->from('column_title');
 
@@ -67,17 +71,17 @@ class Col_titles_model extends CI_Model {
 		}
 
         if($limit_start && $limit_end){
-          $this->db->limit($limit_start, $limit_end);	
+          $this->db->limit($limit_start, $limit_end);
         }
 
         if($limit_start != null){
-          $this->db->limit($limit_start, $limit_end);    
+          $this->db->limit($limit_start, $limit_end);
         }
-        
+
 		$query = $this->db->get();
 		//print_r($this->db->last_query() );
 		//trigger_error("Error message here", E_USER_ERROR);
-		return $query->result_array(); 	
+		return $query->result_array();
     }
 
     /**
@@ -98,17 +102,17 @@ class Col_titles_model extends CI_Model {
 		}else{
 		    $this->db->order_by('id', 'Asc');
 		}
-		
+
 		$query = $this->db->get();
-		
-		return $query->num_rows();        
+
+		return $query->num_rows();
     }
 
 
     /**
     * Store the new item into the database
     * @param array $data - associative array with data to store
-    * @return boolean 
+    * @return boolean
     */
     function store($data)
     {
@@ -134,7 +138,7 @@ class Col_titles_model extends CI_Model {
 			return false;
 		}
     }
-    
+
     /**
     * Delete unit
     * @param int $id - manufacture id
@@ -142,8 +146,8 @@ class Col_titles_model extends CI_Model {
     */
 	function delete($id){
 		$this->db->where('id', $id);
-		$this->db->delete('column_title'); 
+		$this->db->delete('column_title');
 	}
- 
+
 }
 ?>
