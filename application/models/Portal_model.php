@@ -1,5 +1,5 @@
 <?php
-class Col_titles_model extends CI_Model {
+class Portal_model extends CI_Model {
 
     /**
     * Responsable for auto load the database
@@ -12,39 +12,35 @@ class Col_titles_model extends CI_Model {
     }
 
     /**
-    * Get column_title by it's id
+    * Get row_title by it's id
     * @param int $id
     * @return array
     */
     public function get_by_id($id)
     {
 		$this->db->select('*');
-		$this->db->from('column_title');
+		$this->db->from('portal');
 		$this->db->where('id', $id);
 		$query = $this->db->get();
 		return $query->result_array();
     }
 
     /**
-    * Get column_title by it's name
+    * Get row_title by it's name
     * @param text $text
     * @return array
     */
     public function get_by_name($text)
     {
 		$this->db->select('*');
-		$this->db->from('column_title');
-		$this->db->like('name', $text);
+		$this->db->from('portal');
+		$this->db->like('title', $text);
 		$query = $this->db->get();
 		return $query->result_array();
     }
 
-    public function get_all_cursor($value='')
-    {
-     return  $this->db->query("SELECT * FROM column_title"); // whatever you want to export to CSV, just select in query
-    }
     /**
-    * Fetch column_title data from the database
+    * Fetch row_title data from the database
     * possibility to mix search, filter and order
     * @param string $search_string
     * @param strong $order
@@ -57,10 +53,10 @@ class Col_titles_model extends CI_Model {
     {
 
 		$this->db->select('*');
-		$this->db->from('column_title');
+		$this->db->from('portal');
 
 		if($search_string){
-			$this->db->like('name', $search_string);
+			$this->db->like('title', $search_string);
 		}
 		$this->db->group_by('id');
 
@@ -85,7 +81,7 @@ class Col_titles_model extends CI_Model {
     }
 
     /**
-    * Count the number of columns
+    * Count the number of rows
     * @param int $search_string
     * @param int $order
     * @return int
@@ -93,9 +89,9 @@ class Col_titles_model extends CI_Model {
     function count($search_string=null, $order=null)
     {
 		$this->db->select('*');
-		$this->db->from('column_title');
+		$this->db->from('portal');
 		if($search_string){
-			$this->db->like('name', $search_string);
+			$this->db->like('title', $search_string);
 		}
 		if($order){
 			$this->db->order_by($order, 'Asc');
@@ -116,19 +112,23 @@ class Col_titles_model extends CI_Model {
     */
     function store($data)
     {
-		$insert = $this->db->insert('column_title', $data);
+      if(null===$data['id']){
+        $this->db->set('id', 'UUID()', FALSE);
+        unset($data['id']);
+      }
+		  $insert = $this->db->insert('portal', $data);
 	    return $insert;
 	}
 
     /**
-    * Update column_title
+    * Update row_title
     * @param array $data - associative array with data to store
     * @return boolean
     */
     function update($id, $data)
     {
 		$this->db->where('id', $id);
-		$this->db->update('column_title', $data);
+		$this->db->update('portal', $data);
 		$report = array();
 		//$report['error'] = $this->db->_error_number();
 		//$report['message'] = $this->db->_error_message();
@@ -146,7 +146,7 @@ class Col_titles_model extends CI_Model {
     */
 	function delete($id){
 		$this->db->where('id', $id);
-		$this->db->delete('column_title');
+		$this->db->delete('portal');
 	}
 
 }
