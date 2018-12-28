@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once("../../conf/portal_db.php");
 
 /*
 | -------------------------------------------------------------------
@@ -75,10 +76,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '123!@3qwE',
-	'database' => 'portal',
+	'hostname' => DB_SERVER,
+	'username' => DB_USERNAME,
+	'password' => DB_PASSWORD,
+	'database' => DB_DATABASE,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
